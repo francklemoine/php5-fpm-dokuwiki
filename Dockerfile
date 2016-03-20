@@ -7,8 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV PHP_INI_DIR=/usr/local/etc/php/conf.d
 ENV DOKUWIKI_VERSION 2015-08-10a
 ENV DOKUWIKI_CHEKSUM a4b8ae00ce94e42d4ef52dd8f4ad30fe
-ENV DOKUWIKI_PREFIX /opt/dokuwiki
-ENV DLIST_PREFIX /opt/dlist
+ENV DOKUWIKI_PREFIX /opt/www/dokuwiki
 
 # Update & install packages & cleanup afterwards
 RUN buildDeps=' \
@@ -20,10 +19,10 @@ RUN buildDeps=' \
 	&& apt-get install -y --no-install-recommends $buildDeps \
 	&& wget -q -O /dokuwiki.tgz "http://download.dokuwiki.org/src/dokuwiki/dokuwiki-$DOKUWIKI_VERSION.tgz" \
 	&& if [ "$DOKUWIKI_CHEKSUM" != "$(md5sum /dokuwiki.tgz | awk '{print($1)}')" ];then echo "Wrong md5sum of downloaded file!"; exit 1; fi \
-	&& mkdir $DOKUWIKI_PREFIX $DLIST_PREFIX \
+	&& mkdir -p $DOKUWIKI_PREFIX \
 	&& tar -xzf /dokuwiki.tgz -C $DOKUWIKI_PREFIX --strip-components 1 \
 	&& mkdir -p $DOKUWIKI_PREFIX/conf/tpl/dokuwiki \
-	&& chown -R www-data:www-data $DOKUWIKI_PREFIX $DLIST_PREFIX \
+	&& chown -R www-data:www-data $DOKUWIKI_PREFIX \
 	&& rm /dokuwiki.tgz \
 	&& apt-get purge -y --auto-remove $buildDeps \
 	&& apt-get clean autoclean \
@@ -37,5 +36,5 @@ RUN chown www-data:www-data $DOKUWIKI_PREFIX/.htaccess \
 
 COPY doku-php.ini $PHP_INI_DIR
 
-VOLUME ["$DOKUWIKI_PREFIX", "$DLIST_PREFIX"]
+VOLUME ["/opt/www"]
 
