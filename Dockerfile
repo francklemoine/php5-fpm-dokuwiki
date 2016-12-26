@@ -5,7 +5,7 @@ MAINTAINER Franck Lemoine <franck.lemoine@flem.fr>
 ENV DEBIAN_FRONTEND=noninteractive
 
 ENV PHP_INI_DIR=/usr/local/etc/php/conf.d
-ENV DOKUWIKI_VERSION 2015-08-10a
+ENV DOKUWIKI_VERSION 2016-06-26a
 ENV DOKUWIKI_CHEKSUM a4b8ae00ce94e42d4ef52dd8f4ad30fe
 ENV DOKUWIKI_PREFIX /opt/www/dokuwiki
 
@@ -37,4 +37,3 @@ RUN chown www-data:www-data $DOKUWIKI_PREFIX/.htaccess \
 COPY doku-php.ini $PHP_INI_DIR
 
 VOLUME ["/opt/www"]
-
