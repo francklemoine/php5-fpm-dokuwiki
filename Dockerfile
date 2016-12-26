@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 ENV PHP_INI_DIR=/usr/local/etc/php/conf.d
 ENV DOKUWIKI_VERSION 2016-06-26a
-ENV DOKUWIKI_CHEKSUM a4b8ae00ce94e42d4ef52dd8f4ad30fe
+ENV DOKUWIKI_CHEKSUM 9b9ad79421a1bdad9c133e859140f3f2
 ENV DOKUWIKI_PREFIX /opt/www/dokuwiki
 
 # Update & install packages & cleanup afterwards
